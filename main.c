@@ -1,7 +1,18 @@
-#include "stm32f4xx.h"
+#include <stm32f4xx.h>
 
 int main()
 {
-	return 0;
+	/* connect GPIO ports A and B to clock */
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
+
+	GPIOD->MODER |= GPIO_MODER_MODER12_0;
+	GPIOD->OTYPER &= ~GPIO_OTYPER_OT_12;
+	GPIOD->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR12;
+	GPIOD->PUPDR &= ~GPIO_PUPDR_PUPDR12;
+
+	GPIOD->ODR |= GPIO_ODR_ODR_12;
+
+	while (1) {
+	}
 }
 
