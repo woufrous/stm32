@@ -7,6 +7,9 @@ OBJDIR = obj
 # Target file name (without extension)
 TARGET = $(OBJDIR)/blink
 
+# CMSIS root
+CMSISROOT = ../STM32Cube_FW_F4_V1.3.0/Drivers/CMSIS
+
 # Define all C source files (dependencies are generated automatically)
 #
 SOURCES += main.c
@@ -16,8 +19,8 @@ SOURCES += system_stm32f4xx.c
 OBJECTS  = $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(SOURCES))))
 
 # Place -D, -U or -I options here for C and C++ sources
-CPPFLAGS += -I/home/hgrob/code/STM32Cube_FW_F4_V1.3.0/Drivers/CMSIS/Include
-CPPFLAGS += -I/home/hgrob/code/STM32Cube_FW_F4_V1.3.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+CPPFLAGS += -I$(CMSISROOT)/Include
+CPPFLAGS += -I$(CMSISROOT)/Device/ST/STM32F4xx/Include
 CPPFLAGS += -DSTM32F407xx -DHSE_VALUE=16000000L
 
 #---------------- Compiler Options C ----------------
@@ -28,7 +31,7 @@ CPPFLAGS += -DSTM32F407xx -DHSE_VALUE=16000000L
 #  -Wa,...:      tell GCC to pass this to the assembler.
 #    -adhlns...: create assembler listing
 CFLAGS  = -Wall
-CFLAGS	+= -std=gnu99
+CFLAGS	+= -std=c99
 CFLAGS	+= -gdwarf-2
 CFLAGS	+= -ffunction-sections
 CFLAGS	+= -fdata-sections
